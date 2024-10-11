@@ -17,7 +17,6 @@
 package com.example.macrobenchmark
 
 import androidx.benchmark.macro.FrameTimingMetric
-import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
@@ -42,7 +41,7 @@ class ScrollBenchmarks {
                 // Start the default activity, but don't measure the frames yet
                 pressHome()
                 startActivityAndWait()
-            }
+            },
         ) {
             val contentList = device.findObject(By.res("snack_list"))
 

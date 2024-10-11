@@ -44,18 +44,19 @@ class ExampleStartupBenchmark {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startup() = benchmarkRule.measureRepeated(
-        packageName = "com.example.macrobenchmark_codelab",
-        metrics = listOf(StartupTimingMetric()),
-        iterations = 5,
-        startupMode = StartupMode.COLD,
-    ) {
-        pressHome()
-        startActivityAndWait()
+    fun startup() =
+        benchmarkRule.measureRepeated(
+            packageName = "com.example.macrobenchmark_codelab",
+            metrics = listOf(StartupTimingMetric()),
+            iterations = 5,
+            startupMode = StartupMode.COLD,
+        ) {
+            pressHome()
+            startActivityAndWait()
 
-        val contentList = device.findObject(By.res("snack_list"))
-        val searchCondition = Until.hasObject(By.res("snack_collection"))
-        // Wait until a snack collection item within the list is rendered
-        contentList.wait(searchCondition, 5_000)
-    }
+            val contentList = device.findObject(By.res("snack_list"))
+            val searchCondition = Until.hasObject(By.res("snack_collection"))
+            // Wait until a snack collection item within the list is rendered
+            contentList.wait(searchCondition, 5_000)
+        }
 }
