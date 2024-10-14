@@ -1,20 +1,12 @@
 plugins {
-    id("com.android.test")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.test)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.dependency.analysis)
 }
 
 android {
-    compileSdk = 34
+    compileSdk = 35
     namespace = "com.example.macrobenchmark"
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
-    }
 
     defaultConfig {
         minSdk = 23
@@ -36,7 +28,12 @@ android {
     }
 
     targetProjectPath = ":app"
+    @Suppress("UnstableApiUsage") // required for benchmarking
     experimentalProperties["android.experimental.self-instrumenting"] = true
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {

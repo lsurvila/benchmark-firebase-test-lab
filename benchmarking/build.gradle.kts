@@ -21,6 +21,8 @@ plugins {
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.compose.compiler) apply false
+    alias(libs.plugins.dependency.analysis) apply false
 }
 
 subprojects {
@@ -30,11 +32,10 @@ subprojects {
     }
 
     tasks.withType<KotlinCompile>().configureEach {
-        kotlinOptions {
-            freeCompilerArgs += "-opt-in=kotlin.RequiresOptIn"
+        compilerOptions {
+            freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
             // Enable experimental coroutines APIs, including Flow
-            freeCompilerArgs += "-opt-in=kotlin.Experimental"
-            jvmTarget = JavaVersion.VERSION_17.toString()
+            freeCompilerArgs.add("-opt-in=kotlin.Experimental")
         }
     }
 }
